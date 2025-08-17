@@ -1,14 +1,13 @@
 
 // let parrafo = document.querySelector('p');
 // parrafo.innerHTML= 'Indica un número del 1 al 10';
-// Esta parte de variables también se puede eliminar porque podemos mandarlo a llamar con la función asignarTextoElemento que creamos
 
 let numeroSecreto = generarNumeroSecreto();
 //A la declaración de esta variable se le puede asignar la función que creamos abajo para que se pueda utilizar de forma global. 
-
+let intentos = 1; //En esta parte del código se declara una variable de intentos para la implementación de un contador, es igual a uno porque siempre va a intentarlo al menos una vez. 
 
 //Revisamos que ejecute como debería. El resultado deberá ser un número entero de 1 a 10
-
+console.log(numeroSecreto);
 function asignarTextoElemento(elemento, texto){
 
     let elementoHTML = document.querySelector(elemento);
@@ -25,14 +24,18 @@ function verificarIntento(){
    
 //    console.log(numeroUsuario === numeroSecreto);
 
+console.log(intentos);  
 if (numeroUsuario === numeroSecreto){
-        asignarTextoElemento('p', '¡Acertaste!');
+        asignarTextoElemento('p', `¡Acertaste! El número secreto es ${numeroSecreto} y lo lograste en ${intentos} ${(intentos === 1 ? 'vez': 'veces')}.`); //En esta parte del código le avisamos al usuario en cuántos intentos logró acertar al número secreto con el contador "intentos"
    } else {
         if (numeroSecreto < numeroUsuario) {
             asignarTextoElemento('p','El número secreto es menor al que elegiste.');
         } else {
             asignarTextoElemento('p','El número secreto es mayor al que elegiste.');
         }
+
+        intentos ++;
+        //Este es el contador que va a ir aumentando cuando el usuario no acierte al número secreto. 
    }
    ;
    //Esta parte del código es para verificar que el numeroUsuario y el numeroSecreto sean iguales tanto en valor como en tipo, ya que el número secreto es un número entero y el número del usuario también debe serlo para que la comparación sea correcta. El tipo de dato que va a regresar es booleano. 
