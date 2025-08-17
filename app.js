@@ -21,15 +21,24 @@ function verificarIntento(){
    //El parseInt va a obliar a que la variable numeroUsuario sea un número entero, ya que el valor que se obtiene del input es un string debido a la función getElementById, por lo que se debe convertir a número entero para poder compararlo con el número secreto.
    //El getElementById obtiene el elemento del DOM que tenga el id valorUsuario,
     //y la propiedad .value obtiene el valor que el usuario ha ingresado en el input.
-   console.log(numeroSecreto); 
-   console.log(typeof(numeroSecreto));
-   console.log(typeof(numeroUsuario)); 
-   console.log(numeroUsuario);
+
    
-   console.log(numeroUsuario === numeroSecreto);
+//    console.log(numeroUsuario === numeroSecreto);
+
+if (numeroUsuario === numeroSecreto){
+        asignarTextoElemento('p', '¡Acertaste!');
+   } else {
+        if (numeroSecreto < numeroUsuario) {
+            asignarTextoElemento('p','El número secreto es menor al que elegiste.');
+        } else {
+            asignarTextoElemento('p','El número secreto es mayor al que elegiste.');
+        }
+   }
+   ;
    //Esta parte del código es para verificar que el numeroUsuario y el numeroSecreto sean iguales tanto en valor como en tipo, ya que el número secreto es un número entero y el número del usuario también debe serlo para que la comparación sea correcta. El tipo de dato que va a regresar es booleano. 
+
    return;
-   //Esta variable utiliza la función getElementByID para obtener el valor de valorUsuario que es el id de input en el html,como regresa un objeto se le pone la funcion .value para obtener el valor que el usuario ingresa.
+   
 };
 
 function generarNumeroSecreto(){
