@@ -1,7 +1,6 @@
-let numeroSecreto = generarNumeroSecreto();
-//A la declaración de esta variable se le puede asignar la función que creamos abajo para que se pueda utilizar de forma global. 
-let intentos = 1; //En esta parte del código se declara una variable de intentos para la implementación de un contador, es igual a uno porque siempre va a intentarlo al menos una vez. 
-
+let numeroSecreto = 0;
+let intentos = 0; 
+//Sólo se está declarando las variables de forma global para que se puedan utilizar después, sus valores los adquirirá en la función condicionesIniciales
 //Revisamos que ejecute como debería. El resultado deberá ser un número entero de 1 a 10
 
 function asignarTextoElemento(elemento, texto){
@@ -25,6 +24,9 @@ function verificarIntento(){
 console.log(intentos);  
 if (numeroUsuario === numeroSecreto){
         asignarTextoElemento('p', `¡Acertaste! El número secreto es ${numeroSecreto} y lo lograste en ${intentos} ${(intentos === 1 ? 'vez': 'veces')}.`); //En esta parte del código le avisamos al usuario en cuántos intentos logró acertar al número secreto con el contador "intentos"
+
+        document.getElementById('reiniciar').removeAttribute('disabled');
+        //Activa el botón de Iniciar nuevo juego una vez se acierta. Aquí todavía no tiene funcionalidad            
    } else {
         if (numeroSecreto < numeroUsuario) {
             asignarTextoElemento('p','El número secreto es menor al que elegiste.');
@@ -56,7 +58,28 @@ function limpiarcaja(){
 }
 
 
-// En esta parte se esta pasando los parámetros elemento y para que la función pueda trabajar con ellas como variables 
+function condicionesIniciales(){
+    asignarTextoElemento('h1','Juego del Número Secreto');
+    asignarTextoElemento('p','Indica un número entre 1 y 10');
+     //Generar número aleatorio 
+    numeroSecreto = generarNumeroSecreto();
+    //Inicializar el contador de intentos
+    intentos = 1; 
 
-asignarTextoElemento('h1','Juego del Número Secreto');
-asignarTextoElemento('p','Indica un número entre 1 y 10');
+}
+
+function reiniciarJuego(){
+    //limpiar la caja 
+    limpiarcaja();
+    //Indicar mensaje de inicio 
+    condicionesIniciales();
+    //Deshabilitar el botón de nuevo juego
+    document.getElementById('reiniciar').setAttribute('disabled','true');
+
+}
+
+
+
+
+condicionesIniciales();
+
