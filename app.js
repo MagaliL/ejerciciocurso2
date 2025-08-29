@@ -2,6 +2,8 @@ let numeroSecreto = 0;
 let intentos = 0; 
 //Sólo se está declarando las variables de forma global para que se puedan utilizar después, sus valores los adquirirá en la función condicionesIniciales
 //Revisamos que ejecute como debería. El resultado deberá ser un número entero de 1 a 10
+let listaNumSort = []; 
+//Almacena los números que ya fueron sorteados 
 
 function asignarTextoElemento(elemento, texto){
 
@@ -16,12 +18,12 @@ function verificarIntento(){
    let numeroUsuario = parseInt(document.getElementById('valorUsuario').value);
    //El parseInt va a obliar a que la variable numeroUsuario sea un número entero, ya que el valor que se obtiene del input es un string debido a la función getElementById, por lo que se debe convertir a número entero para poder compararlo con el número secreto.
    //El getElementById obtiene el elemento del DOM que tenga el id valorUsuario,
-    //y la propiedad .value obtiene el valor que el usuario ha ingresado en el input.
+   
 
    
 //    console.log(numeroUsuario === numeroSecreto);
 
-console.log(intentos);  
+// console.log(intentos);  
 if (numeroUsuario === numeroSecreto){
         asignarTextoElemento('p', `¡Acertaste! El número secreto es ${numeroSecreto} y lo lograste en ${intentos} ${(intentos === 1 ? 'vez': 'veces')}.`); //En esta parte del código le avisamos al usuario en cuántos intentos logró acertar al número secreto con el contador "intentos"
 
@@ -46,8 +48,23 @@ if (numeroUsuario === numeroSecreto){
 };
 
 function generarNumeroSecreto(){
-    return Math.floor(Math.random()*10)+1;
+
+
+    let numeroGenerado = Math.floor(Math.random()*10)+1;
     //Esta función va a hacer la operación necesaria para crear al número secreto, la función se puede asignar a una variable para que tenga alcance global, si se pone aquí la variable sólo tendrá alcance de bloque y no podrá ser utilizada fuera de la función. 
+    //Si el número generado está en la lista hacemos algo, de lo contrario se continua con el juego. 
+    
+    console.log(numeroGenerado);
+    console.log(listaNumSort);
+    if(listaNumSort.includes(numeroGenerado)){
+        
+        return generarNumeroSecreto();
+
+
+    } else {
+        listaNumSort.push(numeroGenerado);
+        return numeroGenerado;
+    }
 }
 
 function limpiarcaja(){
