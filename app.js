@@ -4,6 +4,8 @@ let intentos = 0;
 //Revisamos que ejecute como debería. El resultado deberá ser un número entero de 1 a 10
 let listaNumSort = []; 
 //Almacena los números que ya fueron sorteados 
+let numeroMax = 10;  
+//De números para el arreglo 
 
 function asignarTextoElemento(elemento, texto){
 
@@ -49,21 +51,32 @@ if (numeroUsuario === numeroSecreto){
 
 function generarNumeroSecreto(){
 
-
-    let numeroGenerado = Math.floor(Math.random()*10)+1;
+    let numeroGenerado = Math.floor(Math.random()*numeroMax)+1;
     //Esta función va a hacer la operación necesaria para crear al número secreto, la función se puede asignar a una variable para que tenga alcance global, si se pone aquí la variable sólo tendrá alcance de bloque y no podrá ser utilizada fuera de la función. 
     //Si el número generado está en la lista hacemos algo, de lo contrario se continua con el juego. 
     
     console.log(numeroGenerado);
     console.log(listaNumSort);
-    if(listaNumSort.includes(numeroGenerado)){
-        
-        return generarNumeroSecreto();
 
+    //Si los elementos de la lista son iguales a el número máximo de números permitidos.  
+    if (listaNumSort.length == numeroMax) {
 
+        //Si ya es igual entonces salimos del juego. 
+
+        asignarTextoElemento('p', 'Ya se sortearon todos los números posibles'); 
     } else {
-        listaNumSort.push(numeroGenerado);
-        return numeroGenerado;
+
+        //Si el número generado está incluido en la lista de números sorteados se debe generar uno nuevo
+        if(listaNumSort.includes(numeroGenerado)){
+            
+            return generarNumeroSecreto();
+
+
+        } else {
+            //De lo contrario se va a agregar el numeroGenerado a la lista. 
+            listaNumSort.push(numeroGenerado);
+            return numeroGenerado;
+        }
     }
 }
 
@@ -77,7 +90,7 @@ function limpiarcaja(){
 
 function condicionesIniciales(){
     asignarTextoElemento('h1','Juego del Número Secreto');
-    asignarTextoElemento('p','Indica un número entre 1 y 10');
+    asignarTextoElemento('p',`Indica un número entre 1 y ${numeroMax}`);
      //Generar número aleatorio 
     numeroSecreto = generarNumeroSecreto();
     //Inicializar el contador de intentos
